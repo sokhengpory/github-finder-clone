@@ -1,17 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-primary">
+    <nav className="navbar bg-primary">
       <h1>
         <i className="fab fa-github" />
         Github Finder
       </h1>
       <ul>
-        <li>Home</li>
-        <li>About</li>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
       </ul>
-    </div>
+    </nav>
   );
 };
 

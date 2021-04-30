@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const Search = ({ getUsers }) => {
+const Search = ({ getUsers, showAlert }) => {
   const [text, setText] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
-    getUsers(text);
+    if (text === '') {
+      showAlert('Please input username');
+    } else {
+      getUsers(text);
+      setText('');
+    }
   };
 
   const onChange = (e) => {
@@ -30,6 +36,11 @@ const Search = ({ getUsers }) => {
       </form>
     </div>
   );
+};
+
+Search.protoType = {
+  getUsers: PropTypes.func.isRequired,
+  showAlert: PropTypes.func.isRequired,
 };
 
 export default Search;

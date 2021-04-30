@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import Spinner from './Spinner';
 import UserItem from './UserItem';
 
@@ -8,8 +8,6 @@ const Users = ({ users, loading }) => {
     gridTemplateColumns: 'repeat(3,1fr)',
     gridGap: '1rem',
   };
-
-  console.log(loading);
 
   if (loading) {
     return <Spinner />;
@@ -22,6 +20,11 @@ const Users = ({ users, loading }) => {
       </div>
     );
   }
+};
+
+Users.protoType = {
+  users: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default Users;

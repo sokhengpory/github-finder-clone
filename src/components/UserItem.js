@@ -1,9 +1,7 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
-const UserItem = (props) => {
-  // console.log(avatar_url, login);
-  console.log(props);
-  const { avatar_url, login, html_url } = props.user;
+const UserItem = ({ user }) => {
+  const { avatar_url, login, html_url } = user;
   return (
     <div>
       <div className="card text-center">
@@ -22,6 +20,10 @@ const UserItem = (props) => {
       </div>
     </div>
   );
+};
+
+UserItem.protoType = {
+  user: PropTypes.object.isRequired,
 };
 
 export default UserItem;
