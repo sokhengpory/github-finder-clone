@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const UserItem = ({ user }) => {
-  const { avatar_url, login, html_url } = user;
+  const { avatar_url, login } = user;
   return (
     <div>
       <div className="card text-center">
@@ -13,9 +14,9 @@ const UserItem = ({ user }) => {
         />
         <h2>{login}</h2>
         <div>
-          <a href={html_url} className="btn btn-dark">
+          <Link to={`/user/${login}`} className="btn btn-dark">
             More
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -7,9 +7,11 @@ import Search from './components/Search';
 import Users from './components/Users';
 import Alert from './components/Alert';
 import About from './components/About';
+import User from './components/User';
 
 const App = () => {
   const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
 
@@ -19,6 +21,13 @@ const App = () => {
       `https://api.github.com/search/users?q=${username}`
     );
     setUsers(res.data.items);
+    setLoading(false);
+  };
+
+  const getUser = async (username) => {
+    setLoading(true);
+    const res = await axios.get(`https://api.github.com/users/${username}`);
+    setUser(res.data);
     setLoading(false);
   };
 
@@ -47,6 +56,13 @@ const App = () => {
               )}
             />
             <Route exact path="/about" component={About} />
+            <Route
+              exact
+              path="/user/:login"
+              render={(props) => (
+                <User {...props} getUser={getUser} user={user} />
+              )}
+            />
           </Switch>
         </div>
       </div>
