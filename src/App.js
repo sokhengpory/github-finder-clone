@@ -14,6 +14,7 @@ const App = () => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
+  const [repos, setRepos] = useState([]);
 
   const getUsers = async (username) => {
     setLoading(true);
@@ -29,6 +30,15 @@ const App = () => {
     const res = await axios.get(`https://api.github.com/users/${username}`);
     setUser(res.data);
     setLoading(false);
+  };
+
+  const getUserRepos = async (username) => {
+    setLoading(true);
+
+    const res = await axios.get(
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc`
+    );
+    setRepos(res.data);
   };
 
   const showAlert = (msg) => {
@@ -60,7 +70,14 @@ const App = () => {
               exact
               path="/user/:login"
               render={(props) => (
-                <User {...props} getUser={getUser} user={user} />
+                <User
+                  {...props}
+                  getUser={getUser}
+                  getUserRepos={getUserRepos}
+                  user={user}
+                  repos={repos}
+                  loading={loading}
+                />
               )}
             />
           </Switch>
