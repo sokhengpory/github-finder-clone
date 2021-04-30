@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Search = () => {
+const Search = (props) => {
+  const [text, setText] = useState('');
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    props.getUsers(text);
+  };
+
+  const onChange = (e) => {
+    setText(e.target.value);
+  };
+
   return (
     <div>
-      <form className="form">
-        <input type="text" name="text" placeholder="Enter username" />
+      <form className="form" onSubmit={onSubmit}>
+        <input
+          type="text"
+          name="text"
+          placeholder="Enter username"
+          onChange={onChange}
+          value={text}
+        />
         <input
           type="submit"
           value="Search"
