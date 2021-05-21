@@ -1,17 +1,16 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import AlertContext from '../context/alert/alertContext';
 
-const Alert = ({ alert }) => {
+const Alert = () => {
+  const alertContext = useContext(AlertContext);
+  const { alert } = alertContext;
   return (
     alert !== null && (
       <div className="btn btn-light btn-block">
-        <h3>{alert.msg}</h3>
+        <h3 style={{ fontWeight: 'lighter' }}>{alert}</h3>
       </div>
     )
   );
-};
-
-Alert.protoType = {
-  alert: PropTypes.object.isRequired,
 };
 
 export default Alert;
